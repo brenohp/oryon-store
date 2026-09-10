@@ -75,9 +75,10 @@ export default function Home() {
     <>
       {/* SEÇÃO 1: HERO */}
       <main className="relative min-h-[calc(100vh-100px)] w-full flex items-center justify-center bg-oryon-offwhite px-6 md:px-12 py-12">
-        <div className="w-full max-w-[1400px] grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center pb-20 md:pb-0">
+        <div className="w-full max-w-[1400px] grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 items-center pb-20 md:pb-0">
           
-          <div className="flex flex-col items-center md:items-start justify-center order-2 md:order-1 mt-10 md:mt-0">
+          {/* Lado do Texto */}
+          <div className="flex flex-col items-center md:items-start justify-center order-2 md:order-1 mt-6 md:mt-0">
             <h1 className="animate-fade-up font-[family-name:var(--font-playfair)] text-[90px] md:text-[140px] lg:text-[170px] xl:text-[190px] font-normal leading-[0.95] tracking-tight text-center md:text-left uppercase text-oryon-black flex flex-col items-center md:items-start">
               <span>Seja</span>
               <span className="text-oryon-red">Real</span>
@@ -87,7 +88,7 @@ export default function Home() {
               O que é real para você?
             </p>
             
-            <Link to="/loja" className="animate-fade-up delay-200 group mt-10 md:mt-12 flex items-center justify-between border-b border-oryon-black pb-2 w-[240px] hover:border-oryon-red transition-all duration-300">
+            <Link to="/loja" className="animate-fade-up delay-200 group mt-8 md:mt-12 flex items-center justify-between border-b border-oryon-black pb-2 w-[240px] hover:border-oryon-red transition-all duration-300">
               <span className="font-sans text-xs font-bold tracking-[0.15em] text-oryon-black group-hover:text-oryon-red transition-colors uppercase">
                 Explorar Coleção
               </span>
@@ -97,8 +98,10 @@ export default function Home() {
             </Link>
           </div>
 
+          {/* Lado da Logo 3D (Responsivo: Perfeito no mobile e intacto no desktop) */}
           <div className="flex justify-center md:justify-end items-center order-1 md:order-2">
-            <div className="animate-fade-up delay-500 relative w-full max-w-[500px] lg:max-w-[800px] xl:max-w-[1000px] aspect-[4/3] flex flex-col items-center justify-center md:scale-125 lg:scale-[1.45] xl:scale-[1.55] md:translate-x-6 lg:translate-x-10 -translate-y-6 md:-translate-y-8 lg:-translate-y-12">
+            <div className="animate-fade-up delay-500 relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-[500px] lg:max-w-[800px] xl:max-w-[1000px] aspect-[4/3] flex flex-col items-center justify-center md:scale-125 lg:scale-[1.45] xl:scale-[1.55] md:translate-x-6 lg:translate-x-10 -translate-y-2 md:-translate-y-8 lg:-translate-y-12">
+              
               <div className="relative w-full h-full z-10">
                 <img 
                   src="/logo_oryon_3d_frente_sem_fundo.png" 
@@ -106,8 +109,13 @@ export default function Home() {
                   className="w-full h-full object-contain [image-rendering:-webkit-optimize-contrast]" 
                 />
               </div>
-              <div className="absolute bottom-[26%] left-1/2 -translate-x-1/2 w-[65%] h-[1px] lg:h-[4px] bg-oryon-black/70 blur-[8px] lg:blur-[10px] rounded-[100%] z-0"></div>
-              <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-[5%] h-[25px] lg:h-[10px] bg-oryon-black/40 blur-[24px] lg:blur-[32px] rounded-[100%] z-0"></div>
+
+              {/* Sombra 1: Contato (Discreta no desktop como era antes, visível no mobile) */}
+              <div className="absolute bottom-[18%] md:bottom-[26%] left-1/2 -translate-x-1/2 w-[70%] md:w-[65%] h-[2px] md:h-[4px] bg-oryon-black/40 md:bg-oryon-black/70 blur-[8px] md:blur-[10px] rounded-[100%] z-0"></div>
+
+              {/* Sombra 2: Ambiente / Reflexo do chão */}
+              <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-[40%] md:w-[5%] h-[15px] md:h-[10px] bg-oryon-black/25 md:bg-oryon-black/40 blur-[18px] md:blur-[32px] rounded-[100%] z-0"></div>
+
             </div>
           </div>
         </div>
