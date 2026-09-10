@@ -67,6 +67,7 @@ export default function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false); 
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false); // Corrigido dentro do escopo do componente
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
 
   // ==========================================
@@ -176,31 +177,41 @@ export default function Navbar() {
                 </svg>
               </button>
 
-              <div className="relative group flex items-center">
+              {/* Menu de Conta com Suporte a Hover (Desktop) e Clique (Mobile) */}
+              <div className="relative flex items-center group">
                 <Link 
                   to={mockUserLogado ? "/perfil" : "/login"} 
-                  className="text-oryon-black group-hover:text-oryon-red transition-colors flex items-center justify-center p-1" 
+                  onClick={(e) => {
+                    if (window.innerWidth < 768) {
+                      e.preventDefault();
+                      setIsUserMenuOpen(!isUserMenuOpen);
+                    }
+                  }}
+                  className="text-oryon-black group-hover:text-oryon-red transition-colors flex items-center justify-center p-1 cursor-pointer" 
                   aria-label="Conta"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                   </svg>
                 </Link>
-                <div className="absolute top-full right-0 mt-4 w-48 bg-oryon-offwhite border border-oryon-black/10 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 flex flex-col py-2 before:absolute before:-top-4 before:right-0 before:w-full before:h-4">
+
+                <div className={`absolute top-full right-0 mt-4 w-48 bg-oryon-offwhite border border-oryon-black/10 shadow-lg transition-all duration-300 z-50 flex flex-col py-2 before:absolute before:-top-4 before:right-0 before:w-full before:h-4 ${
+                  isUserMenuOpen ? "opacity-100 visible" : "opacity-0 invisible md:group-hover:opacity-100 md:group-hover:visible"
+                }`}>
                   {mockUserLogado ? (
                     <>
                       <div className="px-5 py-3 border-b border-oryon-black/10 mb-2">
                         <span className="block font-sans text-[9px] font-bold tracking-widest text-oryon-black/50 uppercase">Autenticado como</span>
                         <span className="block font-sans text-sm font-bold text-oryon-black truncate mt-1">Breno Padovan</span>
                       </div>
-                      <Link to="/perfil" className="px-5 py-2.5 font-sans text-[11px] font-bold tracking-[0.15em] uppercase text-oryon-black hover:text-oryon-red hover:bg-oryon-black/5 transition-colors">Meu Perfil</Link>
-                      <Link to="/perfil" className="px-5 py-2.5 font-sans text-[11px] font-bold tracking-[0.15em] uppercase text-oryon-black hover:text-oryon-red hover:bg-oryon-black/5 transition-colors">Minha Conta</Link>
-                      <Link to="/perfil" className="px-5 py-2.5 font-sans text-[11px] font-bold tracking-[0.15em] uppercase text-oryon-black hover:text-oryon-red hover:bg-oryon-black/5 transition-colors">Meus Pedidos</Link>
+                      <Link to="/perfil" onClick={() => setIsUserMenuOpen(false)} className="px-5 py-2.5 font-sans text-[11px] font-bold tracking-[0.15em] uppercase text-oryon-black hover:text-oryon-red hover:bg-oryon-black/5 transition-colors">Meu Perfil</Link>
+                      <Link to="/perfil" onClick={() => setIsUserMenuOpen(false)} className="px-5 py-2.5 font-sans text-[11px] font-bold tracking-[0.15em] uppercase text-oryon-black hover:text-oryon-red hover:bg-oryon-black/5 transition-colors">Minha Conta</Link>
+                      <Link to="/perfil" onClick={() => setIsUserMenuOpen(false)} className="px-5 py-2.5 font-sans text-[11px] font-bold tracking-[0.15em] uppercase text-oryon-black hover:text-oryon-red hover:bg-oryon-black/5 transition-colors">Meus Pedidos</Link>
                     </>
                   ) : (
                     <>
-                      <Link to="/login" className="px-5 py-3 font-sans text-[11px] font-bold tracking-[0.15em] uppercase text-oryon-black hover:text-oryon-red hover:bg-oryon-black/5 transition-colors">Fazer Login</Link>
-                      <Link to="/cadastro" className="px-5 py-3 font-sans text-[11px] font-bold tracking-[0.15em] uppercase text-oryon-black hover:text-oryon-red hover:bg-oryon-black/5 transition-colors">Criar Conta</Link>
+                      <Link to="/login" onClick={() => setIsUserMenuOpen(false)} className="px-5 py-3 font-sans text-[11px] font-bold tracking-[0.15em] uppercase text-oryon-black hover:text-oryon-red hover:bg-oryon-black/5 transition-colors">Fazer Login</Link>
+                      <Link to="/cadastro" onClick={() => setIsUserMenuOpen(false)} className="px-5 py-3 font-sans text-[11px] font-bold tracking-[0.15em] uppercase text-oryon-black hover:text-oryon-red hover:bg-oryon-black/5 transition-colors">Criar Conta</Link>
                     </>
                   )}
                 </div>
@@ -318,7 +329,6 @@ export default function Navbar() {
               cartItems.map((item) => (
                 <div key={item.id} className="flex items-start space-x-5 group/item">
                   
-                  {/* Foto Real do Produto adaptada para img nativa */}
                   <div className="relative w-20 h-24 bg-white/50 border border-oryon-black/5 flex-shrink-0 flex items-center justify-center overflow-hidden">
                     <img 
                       src={item.img} 
