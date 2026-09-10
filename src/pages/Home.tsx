@@ -74,22 +74,22 @@ export default function Home() {
   return (
     <>
       {/* SEÇÃO 1: HERO */}
-      <main className="relative min-h-[calc(100vh-80px)] md:min-h-[calc(100vh-100px)] w-full flex items-center justify-center bg-oryon-offwhite px-6 md:px-12 pt-4 pb-16 md:py-12">
-        <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-8 items-center">
+      <main className="relative min-h-[calc(100vh-80px)] md:min-h-[calc(100vh-100px)] w-full flex items-center justify-center bg-oryon-offwhite px-6 md:px-12 pt-0 pb-16 md:py-12">
+        <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-8 items-center -mt-12 md:mt-0">
           
           {/* Lado do Texto */}
           <div className="flex flex-col items-center md:items-start justify-center order-2 md:order-1">
-            <h1 className="animate-fade-up font-[family-name:var(--font-playfair)] text-[70px] sm:text-[85px] md:text-[140px] lg:text-[170px] xl:text-[190px] font-normal leading-[0.9] md:leading-[0.95] tracking-tight text-center md:text-left uppercase text-oryon-black flex flex-col items-center md:items-start">
+            <h1 className="animate-fade-up font-[family-name:var(--font-playfair)] text-[90px] md:text-[140px] lg:text-[170px] xl:text-[190px] font-normal leading-[0.9] md:leading-[0.95] tracking-tight text-center md:text-left uppercase text-oryon-black flex flex-col items-center md:items-start">
               <span>Seja</span>
               <span className="text-oryon-red">Real</span>
             </h1>
 
-            <p className="animate-fade-up delay-100 font-sans text-sm md:text-lg font-medium text-oryon-black mt-2 md:mt-6 tracking-wide text-center md:text-left">
+            <p className="animate-fade-up delay-100 font-sans text-base md:text-lg font-medium text-oryon-black mt-2 md:mt-6 tracking-wide text-center md:text-left">
               O que é real para você?
             </p>
             
-            <Link to="/loja" className="animate-fade-up delay-200 group mt-4 md:mt-12 flex items-center justify-between border-b border-oryon-black pb-1.5 md:pb-2 w-[220px] md:w-[240px] hover:border-oryon-red transition-all duration-300">
-              <span className="font-sans text-[11px] md:text-xs font-bold tracking-[0.15em] text-oryon-black group-hover:text-oryon-red transition-colors uppercase">
+            <Link to="/loja" className="animate-fade-up delay-200 group mt-6 md:mt-12 flex items-center justify-between border-b border-oryon-black pb-2 w-[240px] hover:border-oryon-red transition-all duration-300">
+              <span className="font-sans text-xs font-bold tracking-[0.15em] text-oryon-black group-hover:text-oryon-red transition-colors uppercase">
                 Explorar Coleção
               </span>
               <span className="text-oryon-black group-hover:text-oryon-red group-hover:translate-x-2 transition-all text-sm">
@@ -100,7 +100,7 @@ export default function Home() {
 
           {/* Lado da Logo 3D */}
           <div className="flex justify-center md:justify-end items-center order-1 md:order-2">
-            <div className="animate-fade-up delay-500 relative w-full max-w-[240px] sm:max-w-[300px] md:max-w-[500px] lg:max-w-[800px] xl:max-w-[1000px] aspect-[16/10] md:aspect-[4/3] flex flex-col items-center justify-center md:scale-125 lg:scale-[1.45] xl:scale-[1.55] md:translate-x-6 lg:translate-x-10 md:-translate-y-8 lg:-translate-y-12">
+            <div className="animate-fade-up delay-500 relative w-full max-w-[340px] md:max-w-[500px] lg:max-w-[800px] xl:max-w-[1000px] aspect-[4/3] flex flex-col items-center justify-center md:scale-125 lg:scale-[1.45] xl:scale-[1.55] md:translate-x-6 lg:translate-x-10 md:-translate-y-8 lg:-translate-y-12">
               
               <div className="relative w-full h-full z-10">
                 <img 
@@ -111,34 +111,34 @@ export default function Home() {
               </div>
 
               {/* Sombra 1: Contato */}
-              <div className="absolute bottom-[15%] md:bottom-[26%] left-1/2 -translate-x-1/2 w-[65%] h-[2px] md:h-[4px] bg-oryon-black/35 md:bg-oryon-black/70 blur-[6px] md:blur-[10px] rounded-[100%] z-0"></div>
+              <div className="absolute bottom-[20%] md:bottom-[26%] left-1/2 -translate-x-1/2 w-[65%] h-[2px] md:h-[4px] bg-oryon-black/35 md:bg-oryon-black/70 blur-[6px] md:blur-[10px] rounded-[100%] z-0"></div>
 
               {/* Sombra 2: Ambiente */}
-              <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-[35%] md:w-[5%] h-[12px] md:h-[10px] bg-oryon-black/20 md:bg-oryon-black/40 blur-[14px] md:blur-[32px] rounded-[100%] z-0"></div>
+              <div className="absolute bottom-[4%] left-1/2 -translate-x-1/2 w-[35%] md:w-[5%] h-[15px] md:h-[10px] bg-oryon-black/20 md:bg-oryon-black/40 blur-[14px] md:blur-[32px] rounded-[100%] z-0"></div>
 
             </div>
           </div>
         </div>
 
-        {/* BARRA INFERIOR (Posicionada absolutamente no rodapé, igualzinha à versão original do desktop) */}
-        <div className="absolute bottom-4 md:bottom-8 left-0 w-full px-6 md:px-12 flex justify-between items-center">
-          <span className="font-sans text-[8px] sm:text-[9px] md:text-[10px] font-bold tracking-[0.15em] md:tracking-[0.2em] uppercase text-oryon-black w-1/3">
+        {/* BARRA INFERIOR (Com mais distância da borda inferior no mobile via bottom-8) */}
+        <div className="absolute bottom-8 md:bottom-8 left-0 w-full px-6 md:px-12 flex justify-between items-center">
+          <span className="font-sans text-[9px] md:text-[10px] font-bold tracking-[0.2em] uppercase text-oryon-black w-1/3">
             Oryon Collective
           </span>
           <div className="flex items-center justify-center w-1/3">
             <a href="#qualidade" className="animate-bounce flex items-center justify-center p-1 md:p-2 cursor-pointer text-oryon-black/60 hover:text-oryon-black transition-colors">
-              <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
               </svg>
             </a>
           </div>
-          <div className="flex items-center justify-end space-x-2 md:space-x-3 w-1/3">
+          <div className="flex items-center justify-end space-x-3 w-1/3">
             <span className="hidden md:inline font-sans text-xs font-medium lowercase text-oryon-black/70 tracking-normal">
               @oryoncollective
             </span>
-            <a href="https://instagram.com/oryoncollective" target="_blank" rel="noopener noreferrer" className="font-sans text-[8px] sm:text-[9px] md:text-[10px] font-bold tracking-[0.1em] md:tracking-[0.15em] uppercase text-oryon-black hover:text-oryon-red transition-colors flex items-center space-x-1 group">
+            <a href="https://instagram.com/oryoncollective" target="_blank" rel="noopener noreferrer" className="font-sans text-[9px] md:text-[10px] font-bold tracking-[0.15em] uppercase text-oryon-black hover:text-oryon-red transition-colors flex items-center space-x-1.5 group">
               <span>Instagram</span>
-              <svg className="w-2.5 h-2.5 md:w-3 md:h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
               </svg>
             </a>
