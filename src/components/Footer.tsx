@@ -58,7 +58,6 @@ export default function Footer() {
           <div className="md:col-span-2 flex flex-col items-start mt-2">
             <h3 className="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-oryon-black mb-6">Institucional</h3>
             <nav className="flex flex-col space-y-4">
-              <Link to="/sobre" className="font-sans text-sm text-oryon-black/60 hover:text-oryon-red transition-colors">Manifesto</Link>
               <Link to="/contato" className="font-sans text-sm text-oryon-black/60 hover:text-oryon-red transition-colors">Contato</Link>
               <Link to="/termos" className="font-sans text-sm text-oryon-black/60 hover:text-oryon-red transition-colors">Termos de Uso</Link>
             </nav>

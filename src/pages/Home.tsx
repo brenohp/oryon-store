@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 
 // ==========================================
 // MOCK DATA: Seção de Qualidade (Pronto para API)
@@ -19,6 +20,22 @@ const mockQualidadeDestaque = {
     { id: "6", tipoIcone: "acabamento", titulo: "Acabamento", valor: "Gola Canelada" },
   ]
 };
+
+// ==========================================
+// MOCK DATA: Produtos em Destaque
+// ==========================================
+const mockProdutosDestaque = [
+  { id: "1", nome: "Camiseta Oversized Soft Cotton", cor: "Off White", preco: "R$ 149,90", img: "/blusa-offwhite.jpg" },
+  { id: "2", nome: "Camiseta Oversized Soft Cotton", cor: "Marrom", preco: "R$ 149,90", img: "/blusa-marrom.jpg" },
+  { id: "3", nome: "Camiseta Oversized Soft Cotton", cor: "Preta", preco: "R$ 149,90", img: "/blusa-preta.jpg" },
+];
+
+const produtosRotativos = [
+  ...mockProdutosDestaque, 
+  ...mockProdutosDestaque, 
+  ...mockProdutosDestaque, 
+  ...mockProdutosDestaque
+];
 
 // Dicionário de Ícones Dinâmicos
 const renderIcone = (tipo: string) => {
@@ -71,13 +88,35 @@ const renderIcone = (tipo: string) => {
 };
 
 export default function Home() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollCarrossel = (direcao: "esquerda" | "direita") => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth, scrollWidth } = scrollRef.current;
+      const deslocamento = 280; 
+
+      let novoScroll = direcao === "esquerda" ? scrollLeft - deslocamento : scrollLeft + deslocamento;
+
+      if (direcao === "direita" && scrollLeft >= scrollWidth - clientWidth - 10) {
+        novoScroll = 0;
+      } 
+      else if (direcao === "esquerda" && scrollLeft <= 10) {
+        novoScroll = scrollWidth;
+      }
+
+      scrollRef.current.scrollTo({
+        left: novoScroll,
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
     <>
       {/* SEÇÃO 1: HERO */}
       <main className="relative min-h-[calc(100vh-80px)] md:min-h-[calc(100vh-100px)] w-full flex items-center justify-center bg-oryon-offwhite px-6 md:px-12 pt-0 pb-16 md:py-12">
         <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-8 items-center -mt-12 md:mt-0">
           
-          {/* Lado do Texto */}
           <div className="flex flex-col items-center md:items-start justify-center order-2 md:order-1">
             <h1 className="animate-fade-up font-[family-name:var(--font-playfair)] text-[90px] md:text-[140px] lg:text-[170px] xl:text-[190px] font-normal leading-[0.9] md:leading-[0.95] tracking-tight text-center md:text-left uppercase text-oryon-black flex flex-col items-center md:items-start">
               <span>Seja</span>
@@ -98,10 +137,8 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Lado da Logo 3D */}
           <div className="flex justify-center md:justify-end items-center order-1 md:order-2">
             <div className="animate-fade-up delay-500 relative w-full max-w-[340px] md:max-w-[500px] lg:max-w-[800px] xl:max-w-[1000px] aspect-[4/3] flex flex-col items-center justify-center md:scale-125 lg:scale-[1.45] xl:scale-[1.55] md:translate-x-6 lg:translate-x-10 md:-translate-y-8 lg:-translate-y-12">
-              
               <div className="relative w-full h-full z-10">
                 <img 
                   src="/logo_oryon_3d_frente_sem_fundo.png" 
@@ -109,24 +146,18 @@ export default function Home() {
                   className="w-full h-full object-contain [image-rendering:-webkit-optimize-contrast]" 
                 />
               </div>
-
-              {/* Sombra 1: Contato */}
               <div className="absolute bottom-[20%] md:bottom-[26%] left-1/2 -translate-x-1/2 w-[65%] h-[2px] md:h-[4px] bg-oryon-black/35 md:bg-oryon-black/70 blur-[6px] md:blur-[10px] rounded-[100%] z-0"></div>
-
-              {/* Sombra 2: Ambiente */}
               <div className="absolute bottom-[4%] left-1/2 -translate-x-1/2 w-[35%] md:w-[5%] h-[15px] md:h-[10px] bg-oryon-black/20 md:bg-oryon-black/40 blur-[14px] md:blur-[32px] rounded-[100%] z-0"></div>
-
             </div>
           </div>
         </div>
 
-        {/* BARRA INFERIOR (Com mais distância da borda inferior no mobile via bottom-8) */}
         <div className="absolute bottom-8 md:bottom-8 left-0 w-full px-6 md:px-12 flex justify-between items-center">
           <span className="font-sans text-[9px] md:text-[10px] font-bold tracking-[0.2em] uppercase text-oryon-black w-1/3">
             Oryon Collective
           </span>
           <div className="flex items-center justify-center w-1/3">
-            <a href="#qualidade" className="animate-bounce flex items-center justify-center p-1 md:p-2 cursor-pointer text-oryon-black/60 hover:text-oryon-black transition-colors">
+            <a href="#destaques" className="animate-bounce flex items-center justify-center p-1 md:p-2 cursor-pointer text-oryon-black/60 hover:text-oryon-black transition-colors">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
               </svg>
@@ -146,7 +177,93 @@ export default function Home() {
         </div>
       </main>
 
-     {/* SEÇÃO 2: QUALIDADE TÉCNICA (AGORA TOTALMENTE DINÂMICA) */}
+      {/* SEÇÃO 2: CARROSSEL DE LANÇAMENTOS */}
+      <section id="destaques" className="w-full bg-oryon-offwhite px-6 md:px-12 py-16 md:py-24 overflow-hidden border-t border-oryon-black/5 scroll-smooth">
+        <div className="w-full max-w-[1400px] mx-auto">
+          
+          <div className="flex justify-between items-end mb-10 md:mb-12">
+            <div>
+              <span className="font-sans text-[9px] md:text-[10px] font-bold tracking-[0.25em] uppercase text-oryon-black/50 block mb-2">
+                Drop Atual
+              </span>
+              <h2 className="font-sans text-3xl md:text-5xl font-bold uppercase tracking-tight text-oryon-black">
+                Destaques da <span className="text-oryon-red">Coleção</span>
+              </h2>
+            </div>
+
+            <div className="hidden md:flex items-center space-x-3">
+              <button 
+                onClick={() => scrollCarrossel("esquerda")} 
+                className="w-10 h-10 border border-oryon-black/20 flex items-center justify-center hover:bg-oryon-black hover:text-oryon-offwhite transition-colors cursor-pointer"
+                aria-label="Anterior"
+              >
+                ←
+              </button>
+              <button 
+                onClick={() => scrollCarrossel("direita")} 
+                className="w-10 h-10 border border-oryon-black/20 flex items-center justify-center hover:bg-oryon-black hover:text-oryon-offwhite transition-colors cursor-pointer"
+                aria-label="Próximo"
+              >
+                →
+              </button>
+            </div>
+          </div>
+
+          <div 
+            ref={scrollRef}
+            className="flex space-x-4 md:space-x-6 overflow-x-auto scrollbar-none pb-6 snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {produtosRotativos.map((produto, index) => (
+              <div 
+                key={index} 
+                className="w-[200px] sm:w-[220px] md:w-[240px] lg:w-[260px] flex-shrink-0 flex flex-col snap-start group"
+              >
+                {/* Link na Imagem do Produto */}
+                <Link to={`/loja/${produto.id}`} className="relative w-full aspect-[4/5] bg-white/60 border border-oryon-black/10 overflow-hidden mb-4 flex items-center justify-center">
+                  <img 
+                    src={produto.img} 
+                    alt={produto.nome} 
+                    className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500 ease-out" 
+                  />
+                  <div className="absolute top-3 right-3 bg-oryon-black text-oryon-offwhite font-sans text-[8px] md:text-[9px] font-bold uppercase tracking-widest px-2 md:px-3 py-1">
+                    Novo
+                  </div>
+                </Link>
+
+                <div className="flex flex-col items-start">
+                  <div className="w-full flex justify-between items-start gap-2">
+                    <h3 className="font-sans text-xs md:text-sm font-bold uppercase tracking-wide leading-tight">
+                      {/* Link no Título do Produto com Efeito Hover */}
+                      <Link 
+                        to={`/loja/${produto.id}`} 
+                        className="text-oryon-black hover:text-oryon-red transition-colors"
+                      >
+                        {produto.nome}
+                      </Link>
+                    </h3>
+                    <span className="font-sans text-xs md:text-sm font-bold text-oryon-black whitespace-nowrap">
+                      {produto.preco}
+                    </span>
+                  </div>
+                  <span className="font-sans text-[9px] md:text-[10px] text-oryon-black/50 uppercase tracking-widest block mt-1">
+                    Cor: {produto.cor}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex justify-center md:hidden">
+            <Link to="/loja" className="w-full text-center border border-oryon-black text-oryon-black py-3 font-sans text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-oryon-black hover:text-oryon-offwhite transition-colors">
+              Ver Todos os Produtos →
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
+      {/* SEÇÃO 3: QUALIDADE TÉCNICA (TOTALMENTE INTACTA COMO SOLICITADO) */}
       <section id="qualidade" className="w-full min-h-[calc(100vh-70px)] bg-oryon-black px-6 md:px-12 py-20 lg:py-28 flex items-center justify-center scroll-smooth">
         <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-center">
           
@@ -167,8 +284,6 @@ export default function Home() {
             </h2>
             
             <div className="animate-fade-up delay-200 grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-8 border-t border-oryon-offwhite/20 pt-8">
-              
-              {/* MAPEAMENTO DOS DADOS MOCKADOS AQUI */}
               {mockQualidadeDestaque.especificacoes.map((espec) => (
                 <div key={espec.id} className="flex items-start space-x-4">
                   {renderIcone(espec.tipoIcone)}
@@ -182,7 +297,6 @@ export default function Home() {
                   </div>
                 </div>
               ))}
-
             </div>
 
             <Link to={mockQualidadeDestaque.linkUrl} className="animate-fade-up delay-300 mt-10 group flex items-center space-x-3 w-fit border-b border-oryon-offwhite/30 hover:border-oryon-red pb-1 transition-colors">

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const mockUserLogado = true;
+const mockUserLogado = false;
 
 // ==========================================
 // MOCK DATA: Carrinho
