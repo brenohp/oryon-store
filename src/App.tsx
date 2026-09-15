@@ -6,7 +6,7 @@ import Loja from './pages/Loja';
 import Login from './pages/Login';
 import Carrinho from './pages/Carrinho';
 import Cadastro from './pages/Cadastro';
-import Produto from './pages/Produto'; // <-- Importação do Produto
+import Produto from './pages/Produto';
 
 export default function App() {
   return (
@@ -20,8 +20,6 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/carrinho" element={<Carrinho />} />
           <Route path="/cadastro" element={<Cadastro />} />
-          
-          {/* MUDANÇA AQUI: Alterado de /produto/:id para /loja/:id */}
           <Route path="/loja/:id" element={<Produto />} /> 
         </Routes>
       </div>

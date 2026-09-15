@@ -1,8 +1,8 @@
-/* Importando apenas a fonte que você gostou para a interface (Space Grotesk) */
+/* Google Fonts: Space Grotesk */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 @import "tailwindcss";
 
-/* Injetando a sua fonte Didot original para o SEJA REAL */
+/* Fonte Customizada: Theano Didot */
 @font-face {
   font-family: 'Theano Didot';
   src: url('/fonts/TheanoDidot-Regular.ttf') format('truetype');
@@ -11,15 +11,15 @@
 }
 
 @theme {
-  /* Cores exatas do Brandbook */
+  /* Cores do Brandbook Oryøn */
   --color-oryon-offwhite: #F5F3EF;
   --color-oryon-black: #0A0A0A;
   --color-oryon-red: #8B1E1E;
   --color-oryon-grey: #A6A60A;
 
-  /* Fontes do projeto */
+  /* Tipografia Base */
   --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-  --font-playfair: 'Theano Didot', serif; /* Mantemos o nome da variável para não precisar mexer no HTML da Home */
+  --font-playfair: 'Theano Didot', serif;
 }
 
 @layer base {

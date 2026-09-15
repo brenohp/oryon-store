@@ -1,36 +1,26 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-// ==========================================
-// MOCK DATA: Dados do Produto (Pronto para API)
-// ==========================================
+// TODO: [BACKEND] Substituir 'mockProduto' pela requisição GET /api/produtos/:id utilizando o ID extraído da URL.
 const mockProduto = {
   id: "1",
   nome: "Camiseta Oversized Soft Cotton",
   precoStr: "R$ 149,90",
   precoNum: 149.90,
-  descricao: "A essência do minimalismo. Desenvolvida em algodão premium com modelagem oversized autêntica, proporcionando caimento estruturado e conforto absoluto. Peça essencial para o seu guarda-roupa.",
+  descricao: "A essência do minimalismo. Desenvolvida em algodão premium com modelagem oversized autêntica, proporcionando caimento estruturado e conforto absoluto.",
   cor: "Off White",
-  imagens: [
-    "/blusa-offwhite.jpg"
-  ],
+  imagens: ["/blusa-offwhite.jpg"],
   tamanhos: ["P", "M", "G", "GG"],
   detalhes: [
     "Composição: 97% Algodão, 3% Elastano",
     "Gramatura pesada: 200 g/m²",
     "Gola canelada de 3cm",
-    "Costura reforçada ombro a ombro",
     "Modelagem Unissex"
   ]
 };
 
 export default function Produto() {
-  // O hook useParams pega o ID da URL para o back-end buscar no banco
   const { id } = useParams(); 
-  
-  // LOG TEMPORÁRIO: "Usa" a variável para não dar erro no linter e serve de guia para o Dev
-  console.log("ID capturado da URL para futura chamada de API:", id);
-
   const [tamanhoSelecionado, setTamanhoSelecionado] = useState<string | null>(null);
 
   const handleAdicionarAoCarrinho = (e: React.FormEvent) => {
@@ -39,15 +29,14 @@ export default function Produto() {
       alert("Por favor, selecione um tamanho antes de adicionar ao carrinho.");
       return;
     }
-    // Aqui no futuro o Dev vai integrar com o Context API do Carrinho
-    alert(`Adicionado ao carrinho!\nProduto: ${mockProduto.nome}\nTamanho: ${tamanhoSelecionado}`);
+    // TODO: [BACKEND] Disparar Action (Zustand/Redux/Context) para injetar o produto no estado global do Carrinho.
+    alert(`Mock: Adicionado ao carrinho! ID: ${id} | Tam: ${tamanhoSelecionado}`);
   };
 
   return (
     <main className="w-full min-h-[calc(100vh-100px)] bg-oryon-offwhite px-6 md:px-12 py-12 md:py-20">
       <div className="w-full max-w-[1400px] mx-auto">
         
-        {/* Breadcrumbs (Navegação estrutural) */}
         <nav className="flex items-center space-x-2 font-sans text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-oryon-black/50 mb-10">
           <Link to="/" className="hover:text-oryon-black transition-colors">Home</Link>
           <span>/</span>
@@ -58,16 +47,10 @@ export default function Produto() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-start">
           
-          {/* Lado Esquerdo: Imagem do Produto (Pegajosa no Desktop) */}
           <div className="relative w-full aspect-[4/5] bg-white/60 border border-oryon-black/10 overflow-hidden flex items-center justify-center p-8 md:sticky md:top-32">
-            <img 
-              src={mockProduto.imagens[0]} 
-              alt={mockProduto.nome} 
-              className="w-full h-full object-contain"
-            />
+            <img src={mockProduto.imagens[0]} alt={mockProduto.nome} className="w-full h-full object-contain" />
           </div>
 
-          {/* Lado Direito: Informações e Compra */}
           <div className="flex flex-col animate-fade-up">
             
             <div className="border-b border-oryon-black/10 pb-8 mb-8">
@@ -84,8 +67,6 @@ export default function Produto() {
             </p>
 
             <form onSubmit={handleAdicionarAoCarrinho} className="flex flex-col space-y-10 border-b border-oryon-black/10 pb-10 mb-10">
-              
-              {/* Seleção de Cor (Fixa como visualização por enquanto) */}
               <div className="flex flex-col space-y-4">
                 <span className="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-oryon-black/50">
                   Cor Selecionada: <span className="text-oryon-black">{mockProduto.cor}</span>
@@ -95,7 +76,6 @@ export default function Produto() {
                 </div>
               </div>
 
-              {/* Seleção de Tamanho */}
               <div className="flex flex-col space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-oryon-black/50">
@@ -124,11 +104,7 @@ export default function Produto() {
                 </div>
               </div>
 
-              {/* Botão Adicionar */}
-              <button 
-                type="submit" 
-                className="w-full group flex items-center justify-center space-x-4 bg-oryon-black text-oryon-offwhite py-5 hover:bg-oryon-red transition-colors duration-300 cursor-pointer"
-              >
+              <button type="submit" className="w-full group flex items-center justify-center space-x-4 bg-oryon-black text-oryon-offwhite py-5 hover:bg-oryon-red transition-colors duration-300 cursor-pointer">
                 <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase transition-colors">
                   Adicionar à Sacola
                 </span>
@@ -136,7 +112,6 @@ export default function Produto() {
               </button>
             </form>
 
-            {/* Informações Extras */}
             <div className="flex flex-col space-y-4">
               <span className="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-oryon-black/50">
                 Detalhes do Produto
