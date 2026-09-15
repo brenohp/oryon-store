@@ -47,8 +47,11 @@ export default function Produto() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-start">
           
-          <div className="relative w-full aspect-[4/5] bg-white/60 border border-oryon-black/10 overflow-hidden flex items-center justify-center p-8 md:sticky md:top-32">
-            <img src={mockProduto.imagens[0]} alt={mockProduto.nome} className="w-full h-full object-contain" />
+          {/* AQUI FOI FEITO O AJUSTE DE TAMANHO DA IMAGEM */}
+          <div className="w-full flex justify-center md:sticky md:top-32">
+            <div className="relative w-full max-w-[500px] aspect-[4/5] bg-white/60 border border-oryon-black/10 overflow-hidden flex items-center justify-center p-4">
+              <img src={mockProduto.imagens[0]} alt={mockProduto.nome} className="w-full h-full object-contain" />
+            </div>
           </div>
 
           <div className="flex flex-col animate-fade-up">
