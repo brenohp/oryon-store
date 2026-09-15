@@ -137,8 +137,8 @@ export default function Cadastro() {
 
         </div>
 
-        {/* Lado Direito: Elemento Visual */}
-        <div className="animate-fade-up delay-500 flex justify-center items-center order-1 md:order-2 mb-12 md:mb-0">
+        {/* Lado Direito: Elemento Visual (Agora escondido no mobile com hidden md:flex) */}
+        <div className="hidden md:flex animate-fade-up delay-500 justify-center items-center order-1 md:order-2 mb-12 md:mb-0">
           <div className="relative w-full max-w-[400px] aspect-square opacity-90 mix-blend-multiply md:mix-blend-normal">
             <img 
               src="/logo_oryon_3d_lateral_sem_fundo.png" 
